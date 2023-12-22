@@ -13,12 +13,18 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        elevation: 2,
+        elevation: 5,
         foregroundColor: Colors.green,
         backgroundColor: Colors.white,
         title: const Text(
-          "오늘의 웹툰s",
-          style: TextStyle(fontSize: 24, fontWeight: FontWeight.w500),
+          "Webtoon of the day",
+          style: TextStyle(
+            fontSize: 24,
+            // fontWeight: FontWeight.bold,
+            fontFamily: 'NotoSans',
+            // fontFamily: 'Roboto',
+            // fontFamily: 'Cupertino',
+          ),
           // 폰트 바꾸는 방법은?
         ),
       ),
