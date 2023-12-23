@@ -29,6 +29,8 @@ class ApiService {
       for (var webtoon in webtoons) {
         // webtoons라는 객체들로 이루어진 리스트의 각 객체 별로 다음을 실행.
         webtoonInstances.add(WebtoonModel.fromJson(webtoon));
+        // 이렇게 정리도 가능 : final instance = WebtoonMode.fromJson(webtoon);
+        // webtoonInstances.add(instance)
       }
       return webtoonInstances;
     }

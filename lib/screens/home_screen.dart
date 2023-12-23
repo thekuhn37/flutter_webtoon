@@ -6,7 +6,26 @@ import 'package:webtoon/widgets/webtoon_widget.dart';
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
 
+/*(초보 방식)비추다. 왜냐하면 작성할 코드도 많고 HomeScreen이 Stateful
+  위젯이어야하기때문.
+  List<WebtoonModel> webtoons = [];
+  bool isLoading = true;
+
+  void waitForWebToons() async{
+    webtoons = await ApiService.getTodaysToons();
+    isLoading = false;
+    setState((){});
+  }   
+
+  @override
+  void initState(){
+    super.initState();
+    waitForWebToons
+  }
+ */
   final Future<List<WebtoonModel>> webtoons = ApiService.getTodaysToons();
+  // 웹툰모델 인스턴스로 구성된 리스트를 미래에 가져올 때 웹툰스 변수에 넣을 것이다.
+  // 이는 Apiservice.getTodaysToons()로부터 온다.
 
   @override
   Widget build(BuildContext context) {
@@ -28,9 +47,13 @@ class HomeScreen extends StatelessWidget {
           // 폰트 바꾸는 방법은?
         ),
       ),
+      // Future값을 불러오는 것을 기다려주는 위젯 : FutureBuilder.
+      //Builder : Widget for drawing the UI.
       body: FutureBuilder(
         future: webtoons,
+        // Wait for the future called 'webtoons'
         builder: (context, snapshot) {
+          // If you use 'snapshot', you can see the statue of future.
           if (snapshot.hasData) {
             return Column(children: [
               const SizedBox(
