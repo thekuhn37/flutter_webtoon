@@ -19,6 +19,7 @@ class Webtoon extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
+            // detailscreen이라는 위젯을 감싸서 다른 스크린으로 넘기듯 에니메이션을 넣어주는 클래스.
             builder: (context) => DetailScreen(
               title: title,
               thumb: thumb,

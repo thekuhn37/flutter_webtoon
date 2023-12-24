@@ -32,13 +32,12 @@ class _DetailScreenState extends State<DetailScreen> {
     final likedToons = prefs.getStringList('likedToons');
     if (likedToons != null) {
       if (likedToons.contains(widget.id) == true) {
-        setState(
-          () {
-            isLiked = !isLiked;
-          },
-        );
+        setState(() {
+          isLiked = true;
+        });
       }
     } else {
+      // Use consistent key here
       await prefs.setStringList('likedToons', []);
     }
   }
@@ -55,9 +54,9 @@ initState를 써서 얘를 받아야 한다. 그리고 받을 시에는 widget.�
   void initState() {
     // TODO: implement initState
     super.initState();
+    initPrefs();
     webtoon = ApiService.getToonById(widget.id);
     episodes = ApiService.getLatestEpisodesById(widget.id);
-    initPrefs();
   }
 
   onHeartTap() async {
@@ -68,7 +67,8 @@ initState를 써서 얘를 받아야 한다. 그리고 받을 시에는 widget.�
       } else {
         likedToons.add(widget.id);
       }
-      await prefs.setStringList('LikedToons', likedToons);
+      await prefs.setStringList('likedToons', likedToons);
+      // 리스트 수정이 끝난 뒤에는 저장소에 다시 리스트를 저장한다.
       setState(() {
         isLiked = !isLiked;
       });
