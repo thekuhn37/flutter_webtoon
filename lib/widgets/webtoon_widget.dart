@@ -13,6 +13,7 @@ class Webtoon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // 탭 이벤트를 인지하기 위한 위젯 : GestureDetector
     return GestureDetector(
       onTap: () {
         Navigator.push(
@@ -35,6 +36,7 @@ class Webtoon extends StatelessWidget {
             child: Container(
               width: 250,
               clipBehavior: Clip.hardEdge,
+              // 자식이 부모 영역에 침법 시에 취할 대응.
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(15),
                 boxShadow: [

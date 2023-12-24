@@ -26,6 +26,7 @@ class HomeScreen extends StatelessWidget {
   final Future<List<WebtoonModel>> webtoons = ApiService.getTodaysToons();
   // 웹툰모델 인스턴스로 구성된 리스트를 미래에 가져올 때 웹툰스 변수에 넣을 것이다.
   // 이는 Apiservice.getTodaysToons()로부터 온다.
+  // final을 붙여주어야 한다.
 
   @override
   Widget build(BuildContext context) {
@@ -53,6 +54,7 @@ class HomeScreen extends StatelessWidget {
         future: webtoons,
         // Wait for the future called 'webtoons'
         builder: (context, snapshot) {
+          // snapshot : the status of the future.
           // If you use 'snapshot', you can see the statue of future.
           if (snapshot.hasData) {
             return Column(children: [
@@ -60,8 +62,10 @@ class HomeScreen extends StatelessWidget {
                 height: 50,
               ),
               Expanded(child: makeList(snapshot))
+              // ListView에 제한된 높이를 주기 위해서 Expanded로 감쌈.
             ]);
           }
+          // if not, do the belows.
           return const Center(
             child: CircularProgressIndicator(),
           );
@@ -70,13 +74,14 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
+// ListView is the widget optimized for lots of data.
+// ListView.builder : more optimized listview for huge data.
   ListView makeList(AsyncSnapshot<List<WebtoonModel>> snapshot) {
     return ListView.separated(
       padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
       scrollDirection: Axis.horizontal,
       itemCount: snapshot.data!.length,
       itemBuilder: (context, index) {
-        // print(index);
         var webtoon = snapshot.data![index];
         return Webtoon(
           title: webtoon.title,
@@ -91,3 +96,16 @@ class HomeScreen extends StatelessWidget {
     );
   }
 }
+
+/*
+ListView (Beginner version)
+...
+if(snapshot.hasData){
+  return ListView(
+    children : [
+      for(var webtoon in snapshot.data!) Text(webtoon.title)
+    ]
+  )
+}
+
+*/
